@@ -7,15 +7,24 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - restore_cache:
+          key: node_modules_cache
       - node/install-packages:
           cache-path: ~/node_modules
           override-ci-command: npm install
       - run: npm install gulp
       - run: npm install mocha
       - run: ls -l
+      - save_cache:
+          key: node_modules_cache
+          paths:
+            -  ~/node_modules
   unittest:
     executor: node/default
     steps:
+      - checkout
+      - restore_cache:
+          key: node_modules_cache
       - run: ls -l
       - run: "npx gulp build"
       - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
