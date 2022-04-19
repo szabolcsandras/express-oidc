@@ -9,9 +9,7 @@ jobs:
       - checkout
       - restore_cache:
           key: node_modules_cache
-      - node/install-packages:
-          cache-path: ./node_modules
-          override-ci-command: npm install
+      - run: npm install install
       - run: npm install gulp
       - run: npm install mocha
       - run: ls -l
