@@ -16,6 +16,7 @@ jobs:
   unittest:
     executor: node/default
     steps:
+      - run: ls -l
       - run: "npx gulp build"
       - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
 
