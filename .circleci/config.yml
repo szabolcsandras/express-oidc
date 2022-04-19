@@ -4,9 +4,12 @@ orbs:
 # Define the jobs we want to run for this project
 jobs:
   build:
+    executor: node/default
     steps:
-      - run: ls -l
-      - run: npm install
+      - checkout
+      - node/install-packages:
+          cache-path: ~/project/node_modules
+          override-ci-command: npm install
 
 # Orchestrate our job run sequence
 workflows:
