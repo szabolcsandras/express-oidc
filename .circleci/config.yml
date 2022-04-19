@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@5.0.2
 # Define the jobs we want to run for this project
 jobs:
-  build-and-test:
+  build:
     executor: node/default
     steps:
       - checkout
@@ -13,10 +13,17 @@ jobs:
       - run: npm install gulp
       - run: sudo npm install -g gulp
       - run: "gulp unit"
+  unittest:
+    executor: node/default
+    steps:
+      - checkout
+      - run: "gulp unit"
 
 # Orchestrate our job run sequence
 workflows:
-  build_and_test:
+  build:
     jobs:
       - build
-      - unit-test
+  test:
+    jobs:
+      - unittest
