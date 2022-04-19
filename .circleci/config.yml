@@ -6,11 +6,11 @@ jobs:
     docker:
       - image: node:16.14.2-alpine3.15
     steps:
-      - install
-      - run: npm install
+      - checkout
+      - run: echo "this is the build job"
 
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
-      - install
+      - build
