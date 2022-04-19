@@ -7,22 +7,20 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      - restore_cache:
-          key: node_modules_cache
       - run: npm install install
       - run: npm install gulp
       - run: npm install mocha
       - run: ls -l
-      - save_cache:
-          key: node_mod-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: workspace
           paths:
-            -  ./node_modules
+            - ./node_modules
   unittest:
     executor: node/default
     steps:
       - checkout
-      - restore_cache:
-          key: node_mod-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: ./node_modules
       - run: ls -l
       - run: "npx gulp build"
       - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
