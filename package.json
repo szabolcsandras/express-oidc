@@ -1,0 +1,31 @@
+{
+  "name": "express-oidc",
+  "version": "1.0.0",
+  "description": "OIDC validation and middleware functions for ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szabolcsandras/express-oidc.git"
+  },
+  "keywords": [
+    "express",
+    "oidc",
+    "keycloak",
+    "middleware"
+  ],
+  "author": "Andras Szabolcs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szabolcsandras/express-oidc/issues"
+  },
+  "homepage": "https://github.com/szabolcsandras/express-oidc#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-mocha": "^8.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1"
+  }
+}
