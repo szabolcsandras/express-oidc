@@ -38,7 +38,7 @@ gulp.task('unitTest', () => {
 });
 
 gulp.task('functionTest', () => {
-    return gulp.src(['./dist/**/test/function/**/machine*.js'], {read: false})
+    return gulp.src(['./dist/**/test/function/**/*.js'], {read: false})
           .pipe(mocha({reporter: 'list', exit: true, timeout:8000}))
           .on('error', console.error);
 });
