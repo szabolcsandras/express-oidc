@@ -43,6 +43,8 @@ gulp.task('functionTest', () => {
           .on('error', console.error);
 });
 
+gulp.task('build', gulp.series(defaultSequence), () => {});
+
 gulp.task('watchUnit', () => {
     return gulp.watch(['src/**/*.ts', 'test/**/*.spec.ts'], gulp.series([...defaultSequence, "unitTest"]));
 });
