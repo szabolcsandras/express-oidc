@@ -14,7 +14,7 @@ jobs:
       - run: npm install mocha
       - run: ls -l
       - save_cache:
-          key: node_mod
+          key: node_mod-{{ checksum "package-lock.json" }}
           paths:
             -  ./node_modules
   unittest:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: node_mod
+          key: node_mod-{{ checksum "package-lock.json" }}
       - run: ls -l
       - run: "npx gulp build"
       - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
