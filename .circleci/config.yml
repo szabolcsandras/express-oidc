@@ -11,18 +11,17 @@ jobs:
       - run: npm install gulp
       - run: npm install mocha
       - run: ls -l
-      - persist_to_workspace:
-          root: ./
+      - save_cache:
+          key: node_mod1
           paths:
-            - ./node_modules
+            -  ./node_modules
   unittest:
     executor: node/default
     steps:
       - checkout
-      - attach_workspace:
-          at: ./node_modules
+      - restore_cache:
+          key: node_mod1
       - run: ls -l
-      - run: ls -l ./node_modules
       - run: "npx gulp build"
       - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
 
