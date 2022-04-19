@@ -27,7 +27,7 @@ gulp.task('tsCompile', () => {
 });
 
 gulp.task('cpy', function() {
-    return gulp.src(['.env', 'package.json',])
+    return gulp.src(['package.json','package-lock.json'])
       .pipe(gulp.dest('./dist/src'));
 });
 
@@ -43,12 +43,6 @@ gulp.task('functionTest', () => {
           .on('error', console.error);
 });
 
-gulp.task('apiTest', () => {
-    return gulp.src(['./dist/**/test/e2e/**/*.js'], {read: false})
-          .pipe(mocha({reporter: 'list', exit: true, timeout:8000}))
-          .on('error', console.error);
-});
-
 gulp.task('watchUnit', () => {
     return gulp.watch(['src/**/*.ts', 'test/**/*.spec.ts'], gulp.series([...defaultSequence, "unitTest"]));
 });
@@ -57,12 +51,7 @@ gulp.task('watchFunction', () => {
     return gulp.watch(['src/**/*.ts', 'test/**/*.spec.ts'], gulp.series([...defaultSequence, "functionTest"]));
 });
 
-gulp.task('watchApi', () => {
-    return gulp.watch(['src/**/*.ts', 'test/**/*.spec.ts'], gulp.series([...defaultSequence, "apiTest"]));
-});
-
 gulp.task('default', gulp.series([...defaultSequence, "unitTest", "watchUnit"]), () => {});
 
 gulp.task('unit', gulp.series([...defaultSequence, "unitTest", "watchUnit"]), () => {});
 gulp.task('function', gulp.series([...defaultSequence, "functionTest", "watchFunction"]), () => {});
-gulp.task('api', gulp.series([...defaultSequence, "apiTest", "watchApi"]), () => {});

@@ -23,9 +23,14 @@
   },
   "homepage": "https://github.com/szabolcsandras/express-oidc#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "del": "^6.0.0",
+    "eslint": "^8.13.0",
     "gulp": "^4.0.2",
     "gulp-eslint": "^6.0.0",
     "gulp-mocha": "^8.0.0",
-    "gulp-typescript": "^6.0.0-alpha.1"
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "typescript": "^4.6.3"
   }
 }
