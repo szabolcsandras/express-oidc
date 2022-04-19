@@ -10,9 +10,15 @@ jobs:
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
+  unit-test:
+    executor: node/default
+    steps:
+      - checkout
+      - run: "gulp unit"
 
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
       - build
+      - unit-test
