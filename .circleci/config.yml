@@ -10,15 +10,11 @@ jobs:
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
-      - run: npm install gulp
-      - run: sudo npm install -g gulp
-      - run: sudo npm install -g mocha
   unittest:
     executor: node/default
     steps:
-      - checkout
-      - run: "gulp build"
-      - run: "mocha \"./dist/**/test/unit/**/*.spec.js\""
+      - run: "npx gulp build"
+      - run: "npx mocha \"./dist/**/test/unit/**/*.spec.js\""
 
 # Orchestrate our job run sequence
 workflows:
