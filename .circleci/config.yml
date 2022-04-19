@@ -12,7 +12,7 @@ jobs:
       - run: npm install mocha
       - run: ls -l
       - persist_to_workspace:
-          root: workspace
+          root: ./
           paths:
             - ./node_modules
   unittest:
