@@ -10,6 +10,7 @@ jobs:
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
+      - run: npm install gulp
       - run: sudo npm install -g gulp
   unit-test:
     executor: node/default
