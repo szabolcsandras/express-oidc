@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run: "gulp build"
-      - run: "mocha "./dist/**/test/unit/**/*.spec.js""
+      - run: "mocha \"./dist/**/test/unit/**/*.spec.js\""
 
 # Orchestrate our job run sequence
 workflows:
