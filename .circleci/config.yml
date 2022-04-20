@@ -12,7 +12,7 @@ jobs:
       - run: npm install mocha
       - run: ls -l
       - save_cache:
-          key: node_mod1
+          key: node_mod1-{{ pipeline.id }}
           paths:
             -  ./node_modules
   unittest:
