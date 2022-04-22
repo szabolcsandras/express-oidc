@@ -1,6 +1,6 @@
 {
   "name": "express-oidc-mw",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "OIDC validation and middleware functions for ExpressJS",
   "main": "index.js",
   "scripts": {
