@@ -15,6 +15,7 @@ export default async function oidcMiddleware(req: Request, res: Response, next: 
         await jwt.verify(tokenSlice, oidcService.pem);
         return next();
     } catch (ex) {
+        oidcService.errorEvents.emit("tokenError", ex);
         return res.status(401).send({success: false, data: {}, message: "invalidToken"});
     }
 }

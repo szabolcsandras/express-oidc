@@ -4,12 +4,13 @@ import https from "https";
 import axios from "axios";
 import OidcClientOptions from "./oidc-client-options";
 import jwkToPem  from "jwk-to-pem";
-
+import EventEmitter from "events";
 export default class OidcService {
     public static instance: OidcService = null;
     public jwkInfo: JwkInfo = null;
     public jwk: Jwk = null;
     public pem: string = "";
+    public errorEvents: EventEmitter = new EventEmitter();
 
     public async getJwk(options: OidcClientOptions): Promise<Jwk> {
         return new Promise(async (resolve, reject) => {
