@@ -1,10 +1,10 @@
 import chai from "chai";
-import OidcClientOptions, { IOidcOptions } from "../../oidc-client-options";
+import OidcClientOptions, { OidcOptions } from "../../oidc-client-options";
 const expect = chai.expect;
 
 describe("OidcClientOptions...", () => {
     it("constructor should fill attributes correctly", () => {
-        const params: IOidcOptions = {
+        const params: OidcOptions = {
             issuer: "a",
             client_id: "b",
             client_secret: "c",

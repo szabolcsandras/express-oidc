@@ -4,14 +4,15 @@ import https from "https";
 import axios from "axios";
 import OidcClientOptions from "./oidc-client-options";
 import jwkToPem  from "jwk-to-pem";
-
+import EventEmitter from "events";
 export default class OidcService {
     public static instance: OidcService = null;
     public jwkInfo: JwkInfo = null;
-    public jwk: Jwk = null;
-    public pem: string = "";
+    public jwks: Jwk[] = [];
+    public pems: { kid: string, pem: string }[] = [];
+    public errorEvents: EventEmitter = new EventEmitter();
 
-    public async getJwk(options: OidcClientOptions): Promise<Jwk> {
+    public async getJwk(options: OidcClientOptions): Promise<Jwk[]> {
         return new Promise(async (resolve, reject) => {
             const reqConf = {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -25,9 +26,8 @@ export default class OidcService {
                     this.jwkInfo.jwksUri,
                     reqConf,
                 );
-                const res: Jwk = new Jwk(response.data.keys[0]);
-                this.jwk = res;
-                return resolve(res);
+                this.jwks = response.data.keys.map((k:any) => new Jwk(k));
+                return resolve(this.jwks);
             } catch (ex) {
                 return reject(ex);
             }
@@ -50,13 +50,23 @@ export default class OidcService {
                 );
                 const res: JwkInfo = new JwkInfo(response.data);
                 this.jwkInfo = res;
-                this.jwk = await this.getJwk(options);
-                this.pem = jwkToPem(this.jwk as any);
+                this.jwks = await this.getJwk(options);
+                this.pems = this.jwks.map((jwk) => {
+                    return {
+                        kid: jwk.kid,
+                        pem: jwkToPem(jwk as any)
+                    };
+                });
                 return resolve(res);
             } catch (ex) {
                 return reject(ex);
             }
         });
+    }
+
+    getPemByKid(kid: string): string {
+        const filter = this.pems.filter((p) => String(p.kid) === kid);
+        return filter.length > 0 ? filter[0].pem : null;
     }
 
     /**

@@ -1,5 +1,5 @@
 
-export interface IOidcOptions {
+export class OidcOptions {
     issuer?: string;
     client_id?: string;
     client_secret?: string;
@@ -45,9 +45,9 @@ export default class OidcClientOptions {
     /**
      * The constructor fills the attributes of the new instance
      * if correct options are provided.
-     * @param {IOidcOptions} params
+     * @param {OidcOptions} params
      */
-    constructor(params?: IOidcOptions) {
+    constructor(params?: OidcOptions) {
         if (params !== null && params !== undefined) {
             if (params.issuer !== null && params.issuer !== undefined) {
                 this.issuer = String(params.issuer);

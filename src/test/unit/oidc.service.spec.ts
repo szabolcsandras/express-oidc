@@ -15,15 +15,17 @@ describe("OidcService...", () => {
         sinon.stub(axios, "get").resolves({
             data: testJwkInfo,
         });
-        sinon.stub(service, "getJwk").resolves(new Jwk(testJwk.keys[0]));
+        sinon.stub(service, "getJwk").resolves(
+            testJwk.keys.map((k) => new Jwk(k))
+        );
         const res = await service.init(new OidcClientOptions(
             {
                 issuer: testJwkInfo.issuer,
             }
         ));
         expect(res.jwksUri).to.eq(testJwkInfo.jwks_uri);
-        expect(service.pem).to.have.lengthOf.greaterThan(1);
-        expect(service.pem.indexOf("-----BEGIN PUBLIC KEY-----")).to.eq(0);
+        expect(service.pems).to.have.lengthOf.greaterThan(0);
+        expect(service.pems[0].pem.indexOf("-----BEGIN PUBLIC KEY-----")).to.eq(0);
     });
 
     it("getJwkInfo should pass", async () => {
@@ -36,14 +38,14 @@ describe("OidcService...", () => {
                 issuer: testJwkInfo.issuer,
             }
         ));
-        expect(res.kid).to.eq(testJwk.keys[0].kid);
-        expect(res.kty).to.eq(testJwk.keys[0].kty);
-        expect(res.alg).to.eq(testJwk.keys[0].alg);
-        expect(res.n).to.eq(testJwk.keys[0].n);
-        expect(res.e).to.eq(testJwk.keys[0].e);
-        expect(res.x5c).to.deep.eq(testJwk.keys[0].x5c);
-        expect(res.x5t).to.eq(testJwk.keys[0].x5t);
-        expect(res.x5tS256).to.deep.eq(testJwk.keys[0]["x5t#S256"]);
+        expect(res[0].kid).to.eq(testJwk.keys[0].kid);
+        expect(res[0].kty).to.eq(testJwk.keys[0].kty);
+        expect(res[0].alg).to.eq(testJwk.keys[0].alg);
+        expect(res[0].n).to.eq(testJwk.keys[0].n);
+        expect(res[0].e).to.eq(testJwk.keys[0].e);
+        expect(res[0].x5c).to.deep.eq(testJwk.keys[0].x5c);
+        expect(res[0].x5t).to.eq(testJwk.keys[0].x5t);
+        expect(res[0].x5tS256).to.deep.eq(testJwk.keys[0]["x5t#S256"]);
     });
 
     it("getJwkInfo should pass", async () => {
@@ -56,13 +58,13 @@ describe("OidcService...", () => {
                 issuer: testJwkInfo.issuer,
             }
         ));
-        expect(res.kid).to.eq(testJwk.keys[0].kid);
-        expect(res.kty).to.eq(testJwk.keys[0].kty);
-        expect(res.alg).to.eq(testJwk.keys[0].alg);
-        expect(res.n).to.eq(testJwk.keys[0].n);
-        expect(res.e).to.eq(testJwk.keys[0].e);
-        expect(res.x5c).to.deep.eq(testJwk.keys[0].x5c);
-        expect(res.x5t).to.eq(testJwk.keys[0].x5t);
-        expect(res.x5tS256).to.deep.eq(testJwk.keys[0]["x5t#S256"]);
+        expect(res[0].kid).to.eq(testJwk.keys[0].kid);
+        expect(res[0].kty).to.eq(testJwk.keys[0].kty);
+        expect(res[0].alg).to.eq(testJwk.keys[0].alg);
+        expect(res[0].n).to.eq(testJwk.keys[0].n);
+        expect(res[0].e).to.eq(testJwk.keys[0].e);
+        expect(res[0].x5c).to.deep.eq(testJwk.keys[0].x5c);
+        expect(res[0].x5t).to.eq(testJwk.keys[0].x5t);
+        expect(res[0].x5tS256).to.deep.eq(testJwk.keys[0]["x5t#S256"]);
     });
 });

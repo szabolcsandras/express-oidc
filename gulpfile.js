@@ -3,6 +3,8 @@ const ts = require('gulp-typescript');
 const mocha = require('gulp-mocha');
 const del = require('del');
 const eslint = require("gulp-eslint");
+const sourcemaps = require('gulp-sourcemaps');
+const merge = require('merge-stream');
 
 const tsProject = ts.createProject('tsconfig.json');
 const defaultSequence = ["eslint", "clean", "tsCompile", "cpy"];
@@ -21,9 +23,15 @@ gulp.task('clean', () => {
 });
 
 gulp.task('tsCompile', () => {
-    return tsProject.src()
+    var tsResult = tsProject.src()
+        .pipe(sourcemaps.init())
+        .pipe(tsProject());
+    return merge(tsResult, tsResult.js)
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./dist/src'));
+    /*return tsProject.src()
         .pipe(tsProject())
-        .js.pipe(gulp.dest('dist/src'));
+        .js.pipe(gulp.dest('dist/src'));*/
 });
 
 gulp.task('cpy', function() {
