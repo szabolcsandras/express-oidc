@@ -1,6 +1,6 @@
 {
   "name": "express-oidc-mw",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "OIDC validation and middleware functions for ExpressJS",
   "main": "index.js",
   "scripts": {
@@ -46,6 +46,7 @@
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/jwk-to-pem": "^2.0.1",
+    "@types/jwt-decode": "^3.1.0",
     "@types/node": "^17.0.25",
     "axios": "^0.26.1",
     "events": "^3.3.0",
@@ -53,6 +54,7 @@
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
-    "jwks-rsa": "^2.0.5"
+    "jwks-rsa": "^2.0.5",
+    "jwt-decode": "^3.1.2"
   }
 }

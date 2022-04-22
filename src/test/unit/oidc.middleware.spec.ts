@@ -10,7 +10,7 @@ describe("OidcMiddleware...", () => {
     it("init should pass", async () => {
         const cb = () => {return "ok";};
         const oidcService: OidcService = OidcService.getInstance();
-        oidcService.pem = pubkey;
+        oidcService.pems = [{kid: "testkeyid", pem: pubkey}];
         const res = await oidcMiddleware({
             headers: {
                 authorization: "Bearer " + testJwt,
